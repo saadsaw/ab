@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+    <head>
+        <!-- Web Page Metadata -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8">
+
+        <!-- Web Page Title -->
+        <title>Floyd Warshall - PA</title>
+
+        <!-- Web Page Stylesheets -->
+        <link rel="stylesheet" href="styles/bootstrap.css">
+        <link rel="stylesheet" href="styles/custom.css">
+
+        <!-- Web Page Scripts -->
+        <script src="scripts/bootstrap.bundle.js"></script>
+        <script src="scripts/cytoscape.min.js"></script>
+    </head>
+
+    <body>
+
+        <!-- Navigation Bar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <!-- The Branding On The Left -->
+                <a class="navbar-brand" href="index.html">Pathfinding Algorithms</a>
+                <!-- The Navbar Menu Toggler Button (For Small Screens) -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#paNavbar" aria-controls="paNavbar" aria-expanded="false" aria-label="Toggle Navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- The Actual Navbar -->
+                <div class="collapse navbar-collapse" id="paNavbar">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <!-- Link 1 -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <!-- Link 2 -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle active" href="#" id="algorithms-dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Algorithms</a>
+                            <ul class="dropdown-menu" aria-labelledby="algorithms-dropdown">
+                                <li><a class="dropdown-item" href="breadth-first-search.html">Breadth First Search (BFS)</a></li>
+                                <li><a class="dropdown-item" href="depth-first-search.html">Depth First Search (DFS)</a></li>
+                                <li><a class="dropdown-item active" href="floyd-warshall.html">Floyd Warshall</a></li>
+                                <li><a class="dropdown-item" href="bellman-ford.html">Bellman Ford</a></li>
+                                <li><a class="dropdown-item" href="dijkstra.html">Dijkstra</a></li>
+                            </ul>
+                        </li>
+                        <!-- Link 3 -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">About</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Algorithm Page Content -->
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 text-center mt-5">
+                    <h1>Floyd Warshall</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-lg-8 me-auto ms-auto mt-3">
+                    <div class="accordion" id="algorithm-accordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="definition-heading">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#algorithm-definition" aria-expanded="true" aria-controls="algorithm-definition">
+                                    Algorithm Definition
+                                </button>
+                            </h2>
+                            <div id="algorithm-definition" class="accordion-collapse collapse show" aria-labelledby="definition-heading" data-bs-parent="#algorithm-accordion">
+                                <div class="accordion-body">
+                                    The <strong>Floyd Warshall</strong> algorithm is an algorithm for finding shortest paths in a directed weighted graph with positive or negative edge weights (but with no negative cycles).
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="pseudocode-heading">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#algorithm-pseudocode" aria-expanded="false" aria-controls="algorithm-pseudocode">
+                                    Algorithm Pseudocode
+                                </button>
+                            </h2>
+                            <div id="algorithm-pseudocode" class="accordion-collapse collapse" aria-labelledby="pseudocode-heading" data-bs-parent="#algorithm-accordion">
+                                <div class="accordion-body">
+                                    <pre>
+                                        <code>
+1.   procedure FloydWarshallWithPathReconstruction() is
+2.    for each edge (u, v) do
+3.        dist[u][v] ← w(u, v)  // The weight of the edge (u, v)
+4.        next[u][v] ← v
+5.    for each vertex v do
+6.        dist[v][v] ← 0
+7.        next[v][v] ← v
+8.    for k from 1 to |V| do // standard Floyd-Warshall implementation
+9.        for i from 1 to |V|
+10.            for j from 1 to |V|
+11.                if dist[i][j] > dist[i][k] + dist[k][j] then
+12.                    dist[i][j] ← dist[i][k] + dist[k][j]
+13.                    next[i][j] ← next[i][k]
+                                        </code>
+                                    </pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="proscons-heading">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#algorithm-proscons" aria-expanded="false" aria-controls="algorithm-proscons">
+                                    Algorithm Pros And Cons
+                                </button>
+                            </h2>
+                            <div id="algorithm-proscons" class="accordion-collapse collapse" aria-labelledby="proscons-heading" data-bs-parent="#algorithm-accordion">
+                                <div class="accordion-body">
+                                    <strong>Pros (Advantages):</strong>
+                                    <ul>
+                                        <li>It is easy to implement.</li>
+                                        <li>It highlights all the shortest path pairs in a graph.</li>
+                                    </ul>
+                                    <strong>Cons (Disadvantages):</strong>
+                                    <ul>
+                                        <li>It works slower than other algorithms designed for the same task.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="applications-heading">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#algorithm-applications" aria-expanded="false" aria-controls="algorithm-applications">
+                                    Algorithm Applications
+                                </button>
+                            </h2>
+                            <div id="algorithm-applications" class="accordion-collapse collapse" aria-labelledby="applications-heading" data-bs-parent="#algorithm-accordion">
+                                <div class="accordion-body">
+                                    <ul>
+                                        <li>Computing the similarity between graphs.</li>
+                                        <li>Shortest paths in directed graphs.</li>
+                                        <li>Computing canonical form of difference bound matrices (DBMs)</li>
+                                        <li>Widest paths/maximum bandwidth paths.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 mt-5">
+                    <label for="start-node" class="form-label">Start Node</label>
+                    <select class="form-select" id="start-node">
+                        <option value="">Start Search From?</option>
+                    </select>
+                </div>
+                <div class="col-md-3 mt-5">
+                    <label for="goal-node" class="form-label">Goal</label>
+                    <select class="form-select" id="goal-node">
+                        <option value="">Search For?</option>
+                    </select>
+                </div>
+                <div class="col-md-6 mt-5">
+                    <button class="btn btn-primary h-100 float-end" onclick="start()">Animate</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 mb-5 mt-3">
+                    <div id="cy"></div>
+                </div>
+            </div>
+        </div>
+
+        <script src="scripts/floyd-warshall.js"></script>
+    </body>
+
+</html>

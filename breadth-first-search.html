@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+    <head>
+        <!-- Web Page Metadata -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8">
+
+        <!-- Web Page Title -->
+        <title>Breadth First Search - PA</title>
+
+        <!-- Web Page Stylesheets -->
+        <link rel="stylesheet" href="styles/bootstrap.css">
+        <link rel="stylesheet" href="styles/custom.css">
+
+        <!-- Web Page Scripts -->
+        <script src="scripts/bootstrap.bundle.js"></script>
+        <script src="scripts/cytoscape.min.js"></script>
+    </head>
+
+    <body>
+        <!-- Navigation Bar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <!-- The Branding On The Left -->
+                <a class="navbar-brand" href="index.html">Pathfinding Algorithms</a>
+                <!-- The Navbar Menu Toggler Button (For Small Screens) -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#paNavbar" aria-controls="paNavbar" aria-expanded="false" aria-label="Toggle Navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- The Actual Navbar -->
+                <div class="collapse navbar-collapse" id="paNavbar">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <!-- Link 1 -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <!-- Link 2 -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle active" href="#" id="algorithms-dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Algorithms</a>
+                            <ul class="dropdown-menu" aria-labelledby="algorithms-dropdown">
+                                <li><a class="dropdown-item active" href="breadth-first-search.html">Breadth First Search (BFS)</a></li>
+                                <li><a class="dropdown-item" href="depth-first-search.html">Depth First Search (DFS)</a></li>
+                                <li><a class="dropdown-item" href="floyd-warshall.html">Floyd Warshall</a></li>
+                                <li><a class="dropdown-item" href="bellman-ford.html">Bellman Ford</a></li>
+                                <li><a class="dropdown-item" href="dijkstra.html">Dijkstra</a></li>
+                            </ul>
+                        </li>
+                        <!-- Link 3 -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">About</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Algorithm Page Content -->
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 text-center mt-5">
+                    <h1>Breadth First Search (BFS)</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-lg-8 me-auto ms-auto mt-3">
+                    <div class="accordion" id="algorithm-accordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="definition-heading">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#algorithm-definition" aria-expanded="true" aria-controls="algorithm-definition">
+                                    Algorithm Definition
+                                </button>
+                            </h2>
+                            <div id="algorithm-definition" class="accordion-collapse collapse show" aria-labelledby="definition-heading" data-bs-parent="#algorithm-accordion">
+                                <div class="accordion-body">
+                                    <strong>Breadth First Search (BFS)</strong> is an algorithm for traversing or searching tree or graph data structures. It starts at the tree root (or some arbitrary node of a graph, sometimes referred to as a <em>Search Key</em>), and explores all of the neighbor nodes at the present depth prior to moving on to the nodes at the next depth level.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="pseudocode-heading">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#algorithm-pseudocode" aria-expanded="false" aria-controls="algorithm-pseudocode">
+                                    Algorithm Pseudocode
+                                </button>
+                            </h2>
+                            <div id="algorithm-pseudocode" class="accordion-collapse collapse" aria-labelledby="pseudocode-heading" data-bs-parent="#algorithm-accordion">
+                                <div class="accordion-body">
+                                    <pre>
+                                        <code>
+1.    procedure BFS(G, root) is
+2.        let Q be a queue
+3.        label root as discovered
+4.        Q.enqueue(root)
+5.        while Q is not empty do
+6.            v := Q.dequeue()
+7.            if v is the goal then
+8.                return v
+9.                for all edges from v to w in G.adjacentEdges(v) do
+10.                    if w is not labeled as discovered then
+11.                        label w as discovered
+12.                        Q.enqueue(w)
+                                        </code>
+                                    </pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="proscons-heading">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#algorithm-proscons" aria-expanded="false" aria-controls="algorithm-proscons">
+                                    Algorithm Pros And Cons
+                                </button>
+                            </h2>
+                            <div id="algorithm-proscons" class="accordion-collapse collapse" aria-labelledby="proscons-heading" data-bs-parent="#algorithm-accordion">
+                                <div class="accordion-body">
+                                    <strong>Pros (Advantages):</strong>
+                                    <ul>
+                                        <li>If a solution exists, BFS will definitely find it.</li>
+                                        <li>If 2 solutions exist the shortest one is found first.</li>
+                                        <li>Never get trapped in unwanted nodes without the solution.</li>
+                                        <li>Find the closest goal in the least time.</li>
+                                    </ul>
+                                    <strong>Cons (Disadvantages):</strong>
+                                    <ul>
+                                        <li>If the solution is far away from the root, BFS will consume more time.</li>
+                                        <li>Each level of nodes are stored before creating the next one, hence it uses more memory.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="applications-heading">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#algorithm-applications" aria-expanded="false" aria-controls="algorithm-applications">
+                                    Algorithm Applications
+                                </button>
+                            </h2>
+                            <div id="algorithm-applications" class="accordion-collapse collapse" aria-labelledby="applications-heading" data-bs-parent="#algorithm-accordion">
+                                <div class="accordion-body">
+                                    <ul>
+                                        <li>Finding shortest path.</li>
+                                        <li>Checking graph with bipertiteness.</li>
+                                        <li>Copying cheiney's algorithm.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 mt-5">
+                    <label for="start-node" class="form-label">Start Node</label>
+                    <select class="form-select" id="start-node">
+                        <option value="">Start Search From?</option>
+                    </select>
+                </div>
+                <div class="col-md-3 mt-5">
+                    <label for="goal-node" class="form-label">Goal</label>
+                    <select class="form-select" id="goal-node">
+                        <option value="">Search For?</option>
+                    </select>
+                </div>
+                <div class="col-md-6 mt-5">
+                    <button class="btn btn-primary h-100 float-end" onclick="start()">Animate</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 mb-5 mt-3">
+                    <div id="cy"></div>
+                </div>
+            </div>
+        </div>
+
+        <script src="scripts/bfs.js"></script>
+    </body>
+
+</html>
